@@ -230,3 +230,32 @@ document.querySelectorAll('[data-project-link]').forEach(link => {
     // });
   });
 });
+
+
+
+// Add this to your existing script.js or create a new one
+const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+const navbar = document.querySelector('.navbar');
+
+mobileNavToggle.addEventListener('click', () => {
+  const visibility = navbar.getAttribute('data-visible');
+  
+  if (visibility === "false") {
+    navbar.setAttribute('data-visible', "true");
+    mobileNavToggle.setAttribute('aria-expanded', "true");
+  } else {
+    navbar.setAttribute('data-visible', "false");
+    mobileNavToggle.setAttribute('aria-expanded', "false");
+  }
+});
+
+// Close mobile menu when clicking on a link
+const navLinks = document.querySelectorAll('.navbar-link');
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      navbar.setAttribute('data-visible', "false");
+      mobileNavToggle.setAttribute('aria-expanded', "false");
+    }
+  });
+});
